@@ -9,7 +9,8 @@ A super-simple typed netstring encoder/decoder for PHP.
 
 require_once '/path/to/tnetstring/tnetstring.php';
 
-$data = $_REQUEST;
+$data       = $_REQUEST;
+$tnetstring = '';
 
 try {
     $encoder   = new TNetstring_Encoder();
@@ -26,6 +27,23 @@ if (tnetstring_last_error()) {
     // ...
     
     tnestring_clear_last_error();
+}
+
+// It's very much the same for decoding!
+try {
+    $decoder = new TNetstring_Decoder();
+    $data    = $decoder->decode($tnetstring);
+} catch (Exception $e) {
+    // ...
+}
+
+// For completeness...
+$data = tnetstring_decode($tnetstring);
+
+if (tnetstring_last_error()) {
+    // ...
+    
+    tnetstring_clear_last_error();
 }
 
 ```
