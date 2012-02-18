@@ -24,8 +24,8 @@ class TNetstring_DecoderTest extends PHPUnit_Framework_TestCase
             array('0:}', array()),
             array('0:]', array()),
             array(
-                "51:5:hello,39:11:12345678901#4:this,4:true!0:~4:\x00\x00\x00\x00,]}",
-                array('hello' => array(12345678901, 'this', true, null, "\x00\x00\x00\x00"))
+                "44:5:hello,32:5:12345#4:this,4:true!0:~4:\x00\x00\x00\x00,]}",
+                array('hello' => array(12345, 'this', true, null, "\x00\x00\x00\x00"))
             ),
             array('5:12345#', 12345),
             array('12:this is cool,', 'this is cool'),
@@ -43,5 +43,15 @@ class TNetstring_DecoderTest extends PHPUnit_Framework_TestCase
      */
     public function testDecode($tnetstring, $expected) {
         $this->assertEquals($expected, $this->decoder->decode($tnetstring));
+    }
+
+    /**
+     * @expectedException RuntimeException
+     */
+    public function testDecodeDetectsIntegerOverflow() {
+        $value   = '9223372036854775808';
+        $payload = sprintf('%d:%s#', strlen($value), $value);
+
+        $this->decoder->decode($payload);
     }
 }

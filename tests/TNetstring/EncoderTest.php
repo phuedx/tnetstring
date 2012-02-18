@@ -21,8 +21,8 @@ class TNetstring_EncoderTest extends PHPUnit_Framework_TestCase
         return array(
             array(array(), '0:]'),
             array(
-                array('hello' => array(12345678901, 'this', true, null, "\x00\x00\x00\x00")),
-                "51:5:hello,39:11:12345678901#4:this,4:true!0:~4:\x00\x00\x00\x00,]}",
+                array('hello' => array(12345, 'this', true, null, "\x00\x00\x00\x00")),
+                "44:5:hello,32:5:12345#4:this,4:true!0:~4:\x00\x00\x00\x00,]}",
             ),
             array(12345, '5:12345#'),
             array('this is cool', '12:this is cool,'),

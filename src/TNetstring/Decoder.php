@@ -48,8 +48,6 @@ class TNetstring_Decoder
     protected function convertPayloadToPHPValue($payload, $type) {
         // ++$complexityRequiredToConvertValue;
         switch ($type) {
-            case '#':
-                return intval($payload);
             case '^':
                 return floatval($payload);
             case '!':
@@ -60,6 +58,20 @@ class TNetstring_Decoder
                 }
 
                 return null;
+            case '#':
+                $result = intval($payload);
+
+                if (strcmp($result, $payload) != 0) {
+                    // Overflow?
+                    if ($result == PHP_INT_MAX) {
+                        throw new RuntimeException("The payload \"$payload\" was encoded as an integer is larger than " . PHP_INT_MAX);
+                    }
+
+                    throw new RuntimeException("The payload \"$payload\" was encoded as an integer but (obviously) isn't.");
+                }
+
+                return intval($payload);
+
             case ']':
                 return $this->decodeList($payload);
             case '}':
