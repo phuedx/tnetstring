@@ -1,0 +1,21 @@
+{
+    "name": "phuedx/tnetstring",
+    "type": "library",
+    "description": "A super-simple typed netstring encoder/decoder for PHP.",
+    "keywords": ["tnetstring", "netstring"],
+    "homepage": "https://github.com/phuedx/tnetstring",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sam Smith",
+            "email": "samuel.david.smith@gmail.com",
+            "homepage": "https://github.com/phuedx"
+        }
+    ],
+    "require": {
+        "php": ">= 5.2.17"
+    },
+    "autoload": {
+        "psr-0": { "TNetstring": "lib/" }
+    }
+}
