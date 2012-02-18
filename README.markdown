@@ -1,5 +1,7 @@
 # TNetstring
 
+[![Build Status](https://secure.travis-ci.org/phuedx/tnetstring.png?branch=master)](http://travis-ci.org/phuedx/tnetstring)
+
 A super-simple typed netstring encoder/decoder for PHP.
 
 ## Coder meet TNetstring. TNetstring meet coder!
