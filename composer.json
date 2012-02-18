@@ -16,6 +16,6 @@
         "php": ">= 5.2.17"
     },
     "autoload": {
-        "psr-0": { "TNetstring": "lib/" }
+        "psr-0": { "TNetstring": "src/" }
     }
 }
