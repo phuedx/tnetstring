@@ -1,7 +1,7 @@
 {
     "name": "phuedx/tnetstring",
     "type": "library",
-    "description": "A super-simple typed netstring encoder/decoder for PHP.",
+    "description": "A tagged netstring encoder/decoder for PHP.",
     "keywords": ["tnetstring", "netstring"],
     "homepage": "https://github.com/phuedx/tnetstring",
     "license": "MIT",
