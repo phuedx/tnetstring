@@ -30,6 +30,10 @@ $equivalentPayload = $decoder->decode($tnetstring);
 // <=> $equivalentPayload = tnetstring_decode($tnetstring);
 ```
 
+## Resources
+
+[tnetstrings.org](http://tnetstrings.org) has all of the information you'll need to get acquainted with tagged netstrings.
+
 ## License
 
 **TNetstring** is licensed under the MIT license and is copyright (c) 2011 Sam Smith. See the *LICENSE* file for full copyright and license information.
