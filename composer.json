@@ -15,7 +15,13 @@
     "require": {
         "php": ">= 5.2.17"
     },
+    "require-dev": {
+        "phpunit/phpunit": "4.1.*"
+    },
     "autoload": {
         "psr-0": { "TNetstring": "src/" }
+    },
+    "config": {
+        "bin-dir": "bin/"
     }
 }
