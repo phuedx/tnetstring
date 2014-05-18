@@ -15,7 +15,7 @@ $payload = array(
     'authors' => array(
         array(
             'name'     => 'Sam Smith',
-            'email'    => 'samuel.david.smith@gmail.com',
+            'email'    => 'git@samsmith.io',
             'homepage' => 'https://github.com/phuedx',
         ),
     ),
@@ -36,4 +36,4 @@ $equivalentPayload = $decoder->decode($tnetstring);
 
 ## License
 
-**TNetstring** is licensed under the MIT license and is copyright (c) 2011 Sam Smith. See the *LICENSE* file for full copyright and license information.
+**TNetstring** is licensed under the MIT license and is copyright (c) 2011-2014 Sam Smith. See the *LICENSE* file for full copyright and license information.
