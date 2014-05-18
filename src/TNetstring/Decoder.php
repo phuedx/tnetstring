@@ -19,6 +19,10 @@
 class TNetstring_Decoder
 {
     public function decode($tnetstring) {
+        if ( ! $tnetstring) {
+            throw new InvalidArgumentException("Can't decode an empty tnetstring.");
+        }
+
         $remaining = $tnetstring;
         $values    = array();
         

@@ -54,4 +54,11 @@ class TNetstring_DecoderTest extends PHPUnit_Framework_TestCase
 
         $this->decoder->decode($payload);
     }
+
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    public function testDecodeThrowsWhenTnetstringIsEmpty() {
+        $this->decoder->decode('');
+    }
 }
