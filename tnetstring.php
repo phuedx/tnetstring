@@ -8,9 +8,8 @@
  * Please refer the to LICENSE file that was distributed with this source code
  * for the full copyright and license information.
  */
- 
-require_once dirname(__FILE__) . '/src/TNetstring/Decoder.php';
-require_once dirname(__FILE__) . '/src/TNetstring/Encoder.php';
+
+require_once dirname(__FILE__) . '/vendor/autoload.php';
 
 $__tnetstring_last_error = false;
 

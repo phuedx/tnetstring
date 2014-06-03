@@ -11,7 +11,7 @@
 
 define('ITERATIONS', 1048576);
 
-require_once dirname(__FILE__) . '/bootstrap.php';
+require_once dirname(__FILE__) . '/../vendor/autoload.php';
 
 function thrash() {
     $tnetstring = "51:5:hello,39:11:12345678901#4:this,4:true!0:~4:\x00\x00\x00\x00,]}";
