@@ -11,8 +11,18 @@
 
 require_once dirname(__FILE__) . '/vendor/autoload.php';
 
-$__tnetstring_last_error = false;
+$__tnetstring_last_error = null;
 
+/**
+ * Encodes the value as a tagged netstring.
+ *
+ * @see TNetstring_Encoder#encode
+ *
+ * @param mixed $value
+ * @return string|null The encoded tagged netstring. If an error occurs during
+ *   encoding, then `null` is returned. An error *should* only occur if the
+ *   value can't be converted to a string, e.g. the value is a resource.
+ */
 function tnetstring_encode($value) {
     global $__tnetstring_last_error;    
     static $encoder;
@@ -30,6 +40,20 @@ function tnetstring_encode($value) {
     }
 }
 
+/**
+ * Decodes the value or values from the tagged netstring.
+ *
+ * Note well that if the tagged netstring is a single encoded value, then that
+ * value will be returned. If the tagged netstring is a collection of encoded
+ * values those values will be returned as an array.
+ *
+ * @see TNetstring_Decoder#decode
+ *
+ * @param string $tnetstring
+ * @return mixed The decoded value or values. If an error occurs during
+ *   decoding, then `null` is returned. An error *should* only occur if either
+ *   the tagged netstring is empty or incorrectly encoded.
+ */
 function tnetstring_decode($tnetstring) {
     global $__tnetstring_last_error;
     static $decoder;
@@ -47,12 +71,24 @@ function tnetstring_decode($tnetstring) {
     }
 }
 
+/**
+ * Gets the message associated with the last error that occurred during encoding
+ * or decoding, if one occurred.
+ *
+ * @return string|null
+ */
 function tnetstring_last_error() {
     global $__tnetstring_last_error;
     
     return $__tnetstring_last_error;
 }
 
+/**
+ * Clears the message associated with the last error that occurred during
+ * encoding or decoding, if one occurred.
+ *
+ * @return null
+ */
 function tnetstring_clear_last_error() {
     global $__tnetstring_last_error;
 
