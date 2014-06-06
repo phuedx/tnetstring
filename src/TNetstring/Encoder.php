@@ -10,11 +10,19 @@
  */
 
 /**
+ * A tagged netstring encoder.
+ *
  * Example usage:
- * <pre><code>
- * $encoder    = new TNetstring_Encoder();
- * $tnetstring = $encoder->encode("I'm a teapot.");
- * </code></pre>
+ *
+ * <code>
+ * $encoder = new TNetstring_Encoder();
+ *
+ * try {
+ *     $tnetstring = $encoder->encode("I'm a teapot.");
+ * } catch (Exception $e) {
+ *     // ...
+ * }
+ * </pre>
  */
 class TNetstring_Encoder
 {
@@ -26,6 +34,16 @@ class TNetstring_Encoder
     const T_LIST       = ']';
     const T_DICTIONARY = '}';
     
+    /**
+     * Encodes the value as a tagged netstring.
+     *
+     * @see TNetstring_Encoder#encode
+     *
+     * @param mixed $value
+     * @return string
+     * @throws InvalidArgumentException If the value can't be converted to a
+     *   string, e.g. the value is a resource
+     */
     public function encode($value) {
         switch (true) {
             case is_null($value):

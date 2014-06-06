@@ -10,14 +10,35 @@
  */
 
 /**
+ * A tagged netstring decoder.
+ *
  * Example usage:
- * <pre><code>
- *     $decoder = new TNetstring_Decoder();
+ *
+ * <code>
+ * $decoder = new TNetstring_Decoder();
+ *
+ * try {
  *     $decoder->decode("13:I'm a teapot.,");
- * </code></pre>
+ * } catch (Exception $e) {
+ *     // ...
+ * }
+ * </code>
  */
 class TNetstring_Decoder
 {
+    /**
+     * Decodes the value or values from the tagged netstring.
+     *
+     * Note well that if the tagged netstring is a single encoded value, then
+     * that value will be returned. If the tagged netstring is a collection of
+     * encoded values those values will be returned as an array.
+     *
+     * @param string $tnetstring
+     * @return mixed The decoded value or values
+     * @throws InvalidArgumentException If the tagged netstring is an empty
+     *   string
+     * @throws RuntimeException If the tagged netstring is incorrectly encoded
+     */
     public function decode($tnetstring) {
         if ( ! $tnetstring) {
             throw new InvalidArgumentException("Can't decode an empty tnetstring.");
