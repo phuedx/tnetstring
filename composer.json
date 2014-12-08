@@ -19,7 +19,10 @@
         "phpunit/phpunit": "4.1.*"
     },
     "autoload": {
-        "psr-0": { "TNetstring": "src/" }
+        "psr-0": {
+            "TNetstring": "src/"
+        },
+        "files": ["tnetstring.php"]
     },
     "config": {
         "bin-dir": "bin/"
