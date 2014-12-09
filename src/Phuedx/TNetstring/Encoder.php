@@ -2,12 +2,16 @@
 
 /**
  * This file is part of the TNetstring project and is copyright
- * 
+ *
  * (c) 2011-2014 Sam Smith <git@samsmith.io>.
  *
  * Please refer the to LICENSE file that was distributed with this source code
  * for the full copyright and license information.
  */
+
+namespace Phuedx\TNetstring;
+
+use InvalidArgumentException;
 
 /**
  * A tagged netstring encoder.
@@ -15,7 +19,7 @@
  * Example usage:
  *
  * <code>
- * $encoder = new TNetstring_Encoder();
+ * $encoder = new \Phuedx\TNetstring\Encoder();
  *
  * try {
  *     $tnetstring = $encoder->encode("I'm a teapot.");
@@ -24,7 +28,7 @@
  * }
  * </pre>
  */
-class TNetstring_Encoder
+class Encoder
 {
     const T_NULL       = '~';
     const T_BOOL       = '!';
@@ -44,7 +48,8 @@ class TNetstring_Encoder
      * @throws InvalidArgumentException If the value can't be converted to a
      *   string, e.g. the value is a resource
      */
-    public function encode($value) {
+    public function encode($value)
+    {
         switch (true) {
             case is_null($value):
                 return $this->encodeString('', self::T_NULL);
@@ -65,14 +70,16 @@ class TNetstring_Encoder
         }
     }
     
-    protected function encodeString($value, $type = self::T_STRING) {
+    protected function encodeString($value, $type = self::T_STRING)
+    {
         $value = (string) $value;
         
         return sprintf('%d:%s%s', strlen($value), $value, $type);
         
     }
     
-    protected function encodePHPArray($array) {
+    protected function encodePHPArray($array)
+    {
         $isList = true;
         $result = '';
     

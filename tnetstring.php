@@ -2,16 +2,17 @@
 
 /**
  * This file is part of the TNetstring project and is copyright
- * 
+ *
  * (c) 2011-2014 Sam Smith <git@samsmith.io>.
  *
  * Please refer the to LICENSE file that was distributed with this source code
  * for the full copyright and license information.
  */
 
-require_once dirname(__FILE__) . '/vendor/autoload.php';
-
 $__tnetstring_last_error = null;
+
+use Phuedx\TNetstring\Encoder;
+use Phuedx\TNetstring\Decoder;
 
 /**
  * Encodes the value as a tagged netstring.
@@ -24,11 +25,11 @@ $__tnetstring_last_error = null;
  *   value can't be converted to a string, e.g. the value is a resource.
  */
 function tnetstring_encode($value) {
-    global $__tnetstring_last_error;    
+    global $__tnetstring_last_error;
     static $encoder;
     
     if ( ! $encoder) {
-        $encoder = new TNetstring_Encoder();
+        $encoder = new Encoder();
     }
     
     try {
@@ -59,7 +60,7 @@ function tnetstring_decode($tnetstring) {
     static $decoder;
     
     if ( ! $decoder) {
-        $decoder = new TNetstring_Decoder();
+        $decoder = new Decoder();
     }
     
     try {

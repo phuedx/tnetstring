@@ -2,22 +2,29 @@
 
 /**
  * This file is part of the TNetstring project and is copyright
- * 
+ *
  * (c) 2011-2014 Sam Smith <git@samsmith.io>.
  *
  * Please refer the to LICENSE file that was distributed with this source code
  * for the full copyright and license information.
  */
 
-class TNetstring_DecoderTest extends PHPUnit_Framework_TestCase
+namespace Test\Phuedx\TNetstring;
+
+use PHPUnit_Framework_TestCase;
+use Phuedx\TNetstring\Decoder;
+
+class DecoderTest extends PHPUnit_Framework_TestCase
 {
     protected $decoder;
     
-    public function setUp() {
-        $this->decoder = new TNetstring_Decoder();
+    public function setUp()
+    {
+        $this->decoder = new Decoder();
     }
     
-    public static function decodeDataProvider() {
+    public static function decodeDataProvider()
+    {
         // The PHP equivalent of the test cases that can be found at
         // http://codepad.org/Uj42SuMo
         return array(
@@ -41,14 +48,16 @@ class TNetstring_DecoderTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider decodeDataProvider
      */
-    public function testDecode($tnetstring, $expected) {
+    public function testDecode($tnetstring, $expected)
+    {
         $this->assertEquals($expected, $this->decoder->decode($tnetstring));
     }
 
     /**
-     * @expectedException RuntimeException
+     * @expectedException \RuntimeException
      */
-    public function testDecodeDetectsIntegerOverflow() {
+    public function testDecodeDetectsIntegerOverflow()
+    {
         $value   = '9223372036854775808';
         $payload = sprintf('%d:%s#', strlen($value), $value);
 
@@ -56,9 +65,10 @@ class TNetstring_DecoderTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException InvalidArgumentException
+     * @expectedException \InvalidArgumentException
      */
-    public function testDecodeThrowsWhenTnetstringIsEmpty() {
+    public function testDecodeThrowsWhenTnetstringIsEmpty()
+    {
         $this->decoder->decode('');
     }
 }

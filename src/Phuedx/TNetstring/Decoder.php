@@ -2,12 +2,17 @@
 
 /**
  * This file is part of the TNetstring project and is copyright
- * 
+ *
  * (c) 2011-2014 Sam Smith <git@samsmith.io>.
  *
  * Please refer the to LICENSE file that was distributed with this source code
  * for the full copyright and license information.
  */
+
+namespace Phuedx\TNetstring;
+
+use InvalidArgumentException;
+use RuntimeException;
 
 /**
  * A tagged netstring decoder.
@@ -15,7 +20,7 @@
  * Example usage:
  *
  * <code>
- * $decoder = new TNetstring_Decoder();
+ * $decoder = new \Phuedx\TNetstring\Decoder();
  *
  * try {
  *     $decoder->decode("13:I'm a teapot.,");
@@ -24,7 +29,7 @@
  * }
  * </code>
  */
-class TNetstring_Decoder
+class Decoder
 {
     /**
      * Decodes the value or values from the tagged netstring.
@@ -39,21 +44,22 @@ class TNetstring_Decoder
      *   string
      * @throws RuntimeException If the tagged netstring is incorrectly encoded
      */
-    public function decode($tnetstring) {
-        if ( ! $tnetstring) {
+    public function decode($tnetstring)
+    {
+        if (! $tnetstring) {
             throw new InvalidArgumentException("Can't decode an empty tnetstring.");
         }
 
         $remaining = $tnetstring;
         $values    = array();
-        
-        while ($remaining) {  
+
+        while ($remaining) {
             list($size, $data) = explode(':', $remaining, 2);
             $size              = intval($size);
             $payload           = substr($data, 0, $size);
             $remaining         = substr($data, $size);
 
-            if ( ! $remaining) {
+            if (! $remaining) {
                 throw new RuntimeException(sprintf(
                     'The size of the payload "%s" (%d) isn\'t the same as specified (%d).',
                     $payload,
@@ -70,7 +76,8 @@ class TNetstring_Decoder
         return count($values) > 1 ? $values : $values[0];
     }
 
-    protected function convertPayloadToPHPValue($payload, $type) {
+    protected function convertPayloadToPHPValue($payload, $type)
+    {
         // ++$complexityRequiredToConvertValue;
         switch ($type) {
             case '^':
@@ -89,10 +96,14 @@ class TNetstring_Decoder
                 if (strcmp($result, $payload) != 0) {
                     // Overflow?
                     if ($result == PHP_INT_MAX) {
-                        throw new RuntimeException("The payload \"$payload\" was encoded as an integer is larger than " . PHP_INT_MAX);
+                        throw new RuntimeException(
+                            "The payload \"$payload\" was encoded as an integer is larger than " . PHP_INT_MAX
+                        );
                     }
 
-                    throw new RuntimeException("The payload \"$payload\" was encoded as an integer but (obviously) isn't.");
+                    throw new RuntimeException(
+                        "The payload \"$payload\" was encoded as an integer but (obviously) isn't."
+                    );
                 }
 
                 return intval($payload);
@@ -107,15 +118,17 @@ class TNetstring_Decoder
         return $payload;
     }
     
-    protected function decodeList($payload) {
-        if ( ! $payload) {
+    protected function decodeList($payload)
+    {
+        if (! $payload) {
             return array();
         }
     
         return $this->decode($payload);
     }
     
-    protected function decodeDictionary($payload) {
+    protected function decodeDictionary($payload)
+    {
         $list   = $this->decodeList($payload);
         $result = array();
         
@@ -125,7 +138,7 @@ class TNetstring_Decoder
         }
         
         for ($i = 0; isset($list[$i]); $i += 2) {
-            if ( ! is_string($list[$i])) {
+            if (! is_string($list[$i])) {
                 throw new RuntimeException("{$list[$i]} isn't a valid dictionary key.");
             }
             

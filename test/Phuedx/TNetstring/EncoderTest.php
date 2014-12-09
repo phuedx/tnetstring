@@ -2,22 +2,29 @@
 
 /**
  * This file is part of the TNetstring project and is copyright
- * 
+ *
  * (c) 2011-2014 Sam Smith <git@samsmith.io>.
  *
  * Please refer the to LICENSE file that was distributed with this source code
  * for the full copyright and license information.
  */
 
-class TNetstring_EncoderTest extends PHPUnit_Framework_TestCase
+namespace Test\Phuedx\TNetstring;
+
+use PHPUnit_Framework_TestCase;
+use Phuedx\TNetstring\Encoder;
+
+class EncoderTest extends PHPUnit_Framework_TestCase
 {
     protected $encoder;
     
-    public function setUp() {
-        $this->encoder = new TNetstring_Encoder();
+    public function setUp()
+    {
+        $this->encoder = new Encoder();
     }
     
-    public static function encodeDataProvider() {
+    public static function encodeDataProvider()
+    {
         return array(
             array(array(), '0:]'),
             array(
@@ -38,7 +45,8 @@ class TNetstring_EncoderTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider encodeDataProvider
      */
-    public function testEncode($value, $expected) {
+    public function testEncode($value, $expected)
+    {
         $this->assertEquals($expected, $this->encoder->encode($value));
     }
 }
