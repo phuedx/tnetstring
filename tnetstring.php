@@ -11,29 +11,24 @@
 
 $__tnetstring_last_error = null;
 
-use Phuedx\TNetstring\Encoder;
-use Phuedx\TNetstring\Decoder;
+use Phuedx\TNetstring\Codec;
 
 /**
  * Encodes the value as a tagged netstring.
  *
- * @see TNetstring_Encoder#encode
+ * @see \Phuedx\TNetstring\Codec#encode
  *
  * @param mixed $value
  * @return string|null The encoded tagged netstring. If an error occurs during
  *   encoding, then `null` is returned. An error *should* only occur if the
  *   value can't be converted to a string, e.g. the value is a resource.
  */
-function tnetstring_encode($value) {
+function tnetstring_encode($value)
+{
     global $__tnetstring_last_error;
-    static $encoder;
-    
-    if ( ! $encoder) {
-        $encoder = new Encoder();
-    }
     
     try {
-        return $encoder->encode($value);
+        return __tnetstring_codec()->encode($value);
     } catch (Exception $e) {
         $__tnetstring_last_error = $e->getMessage();
         
@@ -48,28 +43,35 @@ function tnetstring_encode($value) {
  * value will be returned. If the tagged netstring is a collection of encoded
  * values those values will be returned as an array.
  *
- * @see TNetstring_Decoder#decode
+ * @see \Phuedx\TNetstring\Codec#decode
  *
  * @param string $tnetstring
  * @return mixed The decoded value or values. If an error occurs during
  *   decoding, then `null` is returned. An error *should* only occur if either
  *   the tagged netstring is empty or incorrectly encoded.
  */
-function tnetstring_decode($tnetstring) {
+function tnetstring_decode($tnetstring)
+{
     global $__tnetstring_last_error;
-    static $decoder;
-    
-    if ( ! $decoder) {
-        $decoder = new Decoder();
-    }
     
     try {
-        return $decoder->decode($tnetstring);
+        return __tnetstring_codec()->decode($tnetstring);
     } catch (Exception $e) {
         $__tnetstring_last_error = $e->getMessage();
         
         return null;
     }
+}
+
+function __tnetstring_codec()
+{
+    static $codec;
+
+    if (! $codec) {
+        $codec = new Codec();
+    }
+
+    return $codec;
 }
 
 /**
@@ -78,7 +80,8 @@ function tnetstring_decode($tnetstring) {
  *
  * @return string|null
  */
-function tnetstring_last_error() {
+function tnetstring_last_error()
+{
     global $__tnetstring_last_error;
     
     return $__tnetstring_last_error;
@@ -90,7 +93,8 @@ function tnetstring_last_error() {
  *
  * @return null
  */
-function tnetstring_clear_last_error() {
+function tnetstring_clear_last_error()
+{
     global $__tnetstring_last_error;
 
     $__tnetstring_last_error = null;
