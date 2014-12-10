@@ -6,7 +6,7 @@
 >
     <testsuites>
         <testsuite name="TNetstring Test Suite">
-            <directory>./tests</directory>
+            <directory>test/</directory>
         </testsuite>
     </testsuites>
 </phpunit>

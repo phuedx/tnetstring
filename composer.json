@@ -8,7 +8,7 @@
     "authors": [
         {
             "name": "Sam Smith",
-            "email": "git@samsmith.io",
+            "email": "yo@samsmith.io",
             "homepage": "https://github.com/phuedx"
         }
     ],
@@ -20,7 +20,7 @@
     },
     "autoload": {
         "psr-0": {
-            "TNetstring": "src/"
+            "": "src/"
         },
         "files": ["tnetstring.php"]
     },

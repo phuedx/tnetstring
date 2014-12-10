@@ -1,33 +1,42 @@
 # TNetstring [![Build Status](https://secure.travis-ci.org/phuedx/tnetstring.png?branch=master)](http://travis-ci.org/phuedx/tnetstring)
 
-A tagged netstring encoder/decoder for PHP.
+A tagged netstring codec for PHP.
 
-## Example Usage
+## Installation
+
+The recommended way to install TNetstring is with [Composer](https://getcomposer.org/).
+
+```
+composer.phar require phuedx/tnetstring
+```
+
+## Usage
 
 ```php
 <?php
 
-require_once '/path/to/tnetstring/tnetstring.php';
-
-// Let's play a quick game of TNetstring Whispers!
+require_once __DIR__.'/vendor/autoload.php';
 
 $payload = array(
     'authors' => array(
         array(
             'name'     => 'Sam Smith',
-            'email'    => 'git@samsmith.io',
+            'email'    => 'yo@samsmith.io',
             'homepage' => 'https://github.com/phuedx',
         ),
     ),
 );
 
-$encoder    = new TNetstring_Encoder();
-$tnetstring = $encoder->encode($payload);
-// <=> $tnetstring = tnetstring_encode($payload);
+$codec = new \Phuedx\TNetstring\Codec();
+$encoded = $codec->encode($payload);
+$decoded = $codec->decode($encoded);
+```
 
-$decoder           = new TNetstring_Decoder();
-$equivalentPayload = $decoder->decode($tnetstring);
-// <=> $equivalentPayload = tnetstring_decode($tnetstring);
+There's also a JSON-like API:
+
+```php
+$encoded = tnetstring_encode($payload);
+$decoded = tnetstring_decode($encoded);
 ```
 
 ## Resources

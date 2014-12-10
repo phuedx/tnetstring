@@ -2,7 +2,7 @@
 
 /**
  * This file is part of the TNetstring project and is copyright
- * 
+ *
  * (c) 2011-2014 Sam Smith <git@samsmith.io>.
  *
  * Please refer the to LICENSE file that was distributed with this source code
@@ -13,7 +13,8 @@ define('ITERATIONS', 1048576);
 
 require_once dirname(__FILE__) . '/../vendor/autoload.php';
 
-function thrash() {
+function thrash()
+{
     $tnetstring = "51:5:hello,39:11:12345678901#4:this,4:true!0:~4:\x00\x00\x00\x00,]}";
 
     $result = tnetstring_decode($tnetstring);
