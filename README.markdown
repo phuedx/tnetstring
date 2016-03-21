@@ -45,4 +45,4 @@ $decoded = tnetstring_decode($encoded);
 
 ## License
 
-**TNetstring** is licensed under the MIT license and is copyright (c) 2011-2014 Sam Smith. See the *LICENSE* file for full copyright and license information.
+**TNetstring** is licensed under the MIT license and is copyright (c) 2011-2016 Sam Smith. See the *LICENSE* file for full copyright and license information.
