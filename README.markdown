@@ -41,8 +41,8 @@ $decoded = tnetstring_decode($encoded);
 
 ## Resources
 
-[tnetstrings.org](http://tnetstrings.org) has all of the information you'll need to get acquainted with tagged netstrings.
+[tnetstrings.org](http://web.archive.org/web/20140701085126/http://tnetstrings.org/) _had_ all of the information you'll need to get acquainted with tagged netstrings.
 
 ## License
 
-**TNetstring** is licensed under the MIT license and is copyright (c) 2011-2014 Sam Smith. See the *LICENSE* file for full copyright and license information.
+**TNetstring** is licensed under the MIT license and is copyright (c) 2011-2016 Sam Smith. See [LICENSE](./LICENSE) for full copyright and license information.
